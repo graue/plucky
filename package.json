@@ -1,0 +1,25 @@
+{
+    "name" : "plucky",
+    "version" : "0.0.0",
+    "description" : "compose musical callbacks into plucky arrangements",
+    "main" : "index.js",
+    "devDependencies" : {
+        "baudio" : "*"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/substack/plucky.git"
+    },
+    "homepage" : "https://github.com/substack/plucky",
+    "keywords" : [
+        "music",
+        "baudio",
+        "electronic"
+    ],
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    },
+    "license" : "MIT"
+}
