@@ -67,6 +67,13 @@ End the currently playing clip only.
 Trigger the musical function at an `index` in the musical array and stop playing
 the current clip.
 
+# attributes
+
+## clip.t
+
+Absolute time in seconds. This is different from the `t` in `f(t, clip)`, which
+is a relative time in seconds for the clip since it started playing.
+
 # install
 
 With [npm](https://npmjs.org) do:

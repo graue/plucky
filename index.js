@@ -41,7 +41,8 @@ module.exports = function (music, end) {
                 destroy : function () {
                     var ix = playing.indexOf(clip);
                     if (ix >= 0) playing.splice(ix, 1);
-                }
+                },
+                t : t
             };
             return sum + clip(t, handle);
         }, 0);
