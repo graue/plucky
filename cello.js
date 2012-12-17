@@ -6,29 +6,29 @@ var music = [
     function (t, clip) {
         if (t > 0.5) clip.end();
         
-        return pluck(t, 100, 32)
-            + pluck(t, 100 * Math.pow(2, 1/2), 32)
+        return pluck(t, 100, 32, 10)
+            + pluck(t, 50 * Math.pow(2, 1/2), 16, 23)
         ;
     },
     function (t, clip) {
         if (t > 0.5) clip.end();
         
         return pluck(t, 100, 32)
-            + pluck(t, 100 * Math.pow(2, 3/5), 32)
+            + pluck(t, 100 * Math.pow(2, 3/5), 32, 10)
         ;
     },
     function (t, clip) {
         if (t > 0.5) clip.end();
         
-        return pluck(t, 100 * Math.pow(2, 7/5), 32)
-            + pluck(t, 100 * Math.pow(2, 3/5), 32)
+        return pluck(t, 100 * Math.pow(2, 7/5), 32, 10)
+            + pluck(t, 100 * Math.pow(2, 3/5), 32, 10)
         ;
     },
     function (t, clip) {
         if (t > 0.5) clip.go(0);
         
-        return pluck(t, 200, 32)
-            + pluck(t, 100 * Math.pow(2, 3/5), 32)
+        return pluck(t, 200, 32, 10)
+            + pluck(t, 100 * Math.pow(2, 3/5), 32, 10)
         ;
     }
 ];
@@ -48,15 +48,7 @@ function player (music) {
         if (index >= music.length) return b.end();
         var m = music[index];
         
-        if (typeof m === 'number') {
-            playing.push(function (t, clip) {
-                if (t - start >= m) {
-                    clip.next();
-                    clip.end();
-                }
-            });
-        }
-        else playing.push(function (t, clip) {
+        playing.push(function (t, clip) {
             return m(t - start, clip);
         });
     }
@@ -86,11 +78,11 @@ function player (music) {
     };
 }
 
-function pluck (t, freq, duration) {
+function pluck (t, freq, duration, steps) {
     var n = duration;
     var scalar = Math.max(0, 0.95 - (t * n) / ((t * n) + 1));
     var sum = 0;
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < steps; i++) {
         sum += Math.sin(tau * t * (freq + i * freq));
     }
     return scalar * sum / 6;
