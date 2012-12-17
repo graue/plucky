@@ -4,10 +4,31 @@ var tau = 2 * Math.PI;
 
 var music = [
     function (t, clip) {
-        if (t > 2) clip.end();
+        if (t > 0.5) clip.end();
         
         return pluck(t, 100, 32)
             + pluck(t, 100 * Math.pow(2, 1/2), 32)
+        ;
+    },
+    function (t, clip) {
+        if (t > 0.5) clip.end();
+        
+        return pluck(t, 100, 32)
+            + pluck(t, 100 * Math.pow(2, 3/5), 32)
+        ;
+    },
+    function (t, clip) {
+        if (t > 0.5) clip.end();
+        
+        return pluck(t, 100 * Math.pow(2, 7/5), 32)
+            + pluck(t, 100 * Math.pow(2, 3/5), 32)
+        ;
+    },
+    function (t, clip) {
+        if (t > 0.5) clip.end();
+        
+        return pluck(t, 200, 32)
+            + pluck(t, 100 * Math.pow(2, 3/5), 32)
         ;
     }
 ];
@@ -18,11 +39,14 @@ function player (music) {
     var playing = [];
     var bucket = 0;
     var elapsed = 0;
-    var target = shift(0);
+    var index = -1;
+    
+    shift(0);
     
     function shift (start) {
-        if (music.length === 0) return b.end();
-        var m = music.shift();
+        index ++;
+        if (index >= music.length) return b.end();
+        var m = music[index];
         
         if (typeof m === 'number') {
             playing.push(function (t, clip) {
