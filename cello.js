@@ -25,7 +25,7 @@ var music = [
         ;
     },
     function (t, clip) {
-        if (t > 0.5) clip.end();
+        if (t > 0.5) clip.go(0);
         
         return pluck(t, 200, 32)
             + pluck(t, 100 * Math.pow(2, 3/5), 32)
@@ -65,7 +65,13 @@ function player (music) {
         if (playing.length === 0) b.end();
         
         return playing.reduce(function (sum, clip) {
-            return sum + clip(t, {
+            var handle = {
+                go : function (i) {
+                    var ix = playing.indexOf(clip);
+                    if (ix >= 0) playing.splice(ix, 1);
+                    index = i - 1;
+                    shift(t);
+                },
                 next : function () {
                     shift(t);
                 },
@@ -74,7 +80,8 @@ function player (music) {
                     if (ix >= 0) playing.splice(ix, 1);
                     shift(t);
                 }
-            });
+            };
+            return sum + clip(t, handle);
         }, 0);
     };
 }
