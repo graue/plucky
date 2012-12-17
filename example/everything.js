@@ -26,18 +26,22 @@ var beats = [
     function (t, clip) {
         if (t > 1) clip.end();
         
+        var n = Math.pow(2, 5 / 8);
+        
         var sum = 0;
         for (var i = 0; i < 10; i++) {
-            sum += Math.sin(tau * t * 20 * Math.pow(2, (i * 2)/5));
+            sum += Math.sin(tau * t * 50 * n * Math.pow(2, i / 3));
         }
         return sum / 8 * (t % 1 / 8 > 1 / 32);
     },
     function (t, clip) {
         if (t > 1) clip.end();
         
+        var n = Math.pow(2, 5.5 / 8);
+        
         var sum = 0;
         for (var i = 0; i < 10; i++) {
-            sum += Math.sin(tau * t * 40 * Math.pow(2, (i * 2)/5));
+            sum += Math.sin(tau * t * 50 * n * Math.pow(2, i / 3));
         }
         return sum / 8 * (t % 1 / 8 > 1 / 32);
     },
