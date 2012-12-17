@@ -2,9 +2,9 @@ module.exports = function (music) {
     var playing = [];
     var index = -1;
     
-    shift(0);
+    next(0);
     
-    function shift (start) {
+    function next (start) {
         index ++;
         if (index >= music.length) return b.end();
         var m = music[index];
@@ -23,15 +23,15 @@ module.exports = function (music) {
                     var ix = playing.indexOf(clip);
                     if (ix >= 0) playing.splice(ix, 1);
                     index = i - 1;
-                    shift(t);
+                    next(t);
                 },
                 next : function () {
-                    shift(t);
+                    next(t);
                 },
                 end : function () {
                     var ix = playing.indexOf(clip);
                     if (ix >= 0) playing.splice(ix, 1);
-                    shift(t);
+                    next(t);
                 }
             };
             return sum + clip(t, handle);
