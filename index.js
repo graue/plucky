@@ -1,4 +1,4 @@
-module.exports = function (music) {
+module.exports = function (music, end) {
     var playing = [];
     var index = -1;
     
@@ -6,7 +6,10 @@ module.exports = function (music) {
     
     function next (start) {
         index ++;
-        if (index >= music.length) return b.end();
+        if (index >= music.length) {
+            if (end) end();
+            return;
+        }
         var m = music[index];
         
         playing.push(function (t, clip) {
@@ -15,7 +18,10 @@ module.exports = function (music) {
     }
     
     return function (t) {
-        if (playing.length === 0) b.end();
+        if (playing.length === 0) {
+            if (end) end();
+            return 0;
+        }
         
         return playing.reduce(function (sum, clip) {
             var handle = {
