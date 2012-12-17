@@ -1,6 +1,6 @@
 {
     "name" : "plucky",
-    "version" : "0.0.0",
+    "version" : "0.1.0",
     "description" : "compose musical callbacks into plucky arrangements",
     "main" : "index.js",
     "devDependencies" : {

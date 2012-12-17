@@ -48,17 +48,24 @@ described below. Musical functions should return a floating point value between
 
 If provided, `end()` fires when there's no more music to play.
 
-## clip.next()
+## clip.next(index)
 
 Trigger the next musical function, if there is one.
 
+If `index` is specified, trigger the musical function at `index`.
+
 ## clip.end()
 
-End the currently playing musical function.
+End the currently playing clip and trigger the next clip.
+
+## clip.destroy()
+
+End the currently playing clip only.
 
 ## clip.go(index)
 
-Trigger the musical function at an `index` in the musical array.
+Trigger the musical function at an `index` in the musical array and stop playing
+the current clip.
 
 # install
 

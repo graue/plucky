@@ -26,18 +26,21 @@ module.exports = function (music, end) {
         return playing.reduce(function (sum, clip) {
             var handle = {
                 go : function (i) {
-                    var ix = playing.indexOf(clip);
-                    if (ix >= 0) playing.splice(ix, 1);
+                    handle.destroy();
                     index = i - 1;
                     next(t);
                 },
-                next : function () {
+                next : function (i) {
+                    if (i !== undefined) index = i - 1;
                     next(t);
                 },
                 end : function () {
+                    handle.destroy();
+                    next(t);
+                },
+                destroy : function () {
                     var ix = playing.indexOf(clip);
                     if (ix >= 0) playing.splice(ix, 1);
-                    next(t);
                 }
             };
             return sum + clip(t, handle);
